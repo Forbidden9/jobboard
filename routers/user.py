@@ -1,7 +1,17 @@
 from fastapi import APIRouter
+from db.session import SessionLocal
 from schemas.user import UserSchema
 
-user = APIRouter()
+user = APIRouter(tags=["user"])
+
+
+# Conexion con una session
+def get_db():
+    try:
+        db = SessionLocal()
+        yield db
+    finally:
+        db.close()
 
 
 @user.get("/")
