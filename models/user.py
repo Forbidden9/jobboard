@@ -6,6 +6,6 @@ users = Table("users", meta_data,
               Column("id", Integer, primary_key=True),
               Column("name", String(255), nullable=False),
               Column("username", String(255), nullable=False),
-              Column("password", String(255), nullable=False)
+              Column("password", String(255), nullable=False, unique=True)
               )
 meta_data.create_all(engine)
