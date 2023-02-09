@@ -1,5 +1,22 @@
+# Allow requeriments.txt
+!requeriments.txt
+
+# Byte-compiled
 __pycache__
+
+# Ignore init file
+__init__
+
+# Ignore Enviroment files
 .env
 env
+
+# Ignore Folder Virtual Enviroment files
 venv
+
+# Ignore IDE files
 .idea
+/.idea/
+
+# Ignore all text files
+*.txt
