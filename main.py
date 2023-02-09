@@ -3,7 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from config.config import settings
 from db.session import engine
 from db.base_class import Base
-from router.router import user
+from routers.user import user
 import uvicorn
 
 
