@@ -5,13 +5,6 @@ from schemas.user import UserSchema
 user = APIRouter(tags=["user"])
 
 
-# Conexion con una session
-def get_db():
-    try:
-        db = SessionLocal()
-        yield db
-    finally:
-        db.close()
 
 
 @user.get("/")
