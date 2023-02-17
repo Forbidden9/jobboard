@@ -5,6 +5,7 @@ import uvicorn
 
 
 def start_application():
+    Base.metadata.create_all(bind=engine)
     app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
     app.include_router(user, tags=["user"], prefix='/api/user')
     return app

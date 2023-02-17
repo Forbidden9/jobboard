@@ -1,8 +1,8 @@
 import uuid
-from sqlalchemy import Table, Column, text
+from sqlalchemy import Column, text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql.sqltypes import Integer, String, Boolean, TIMESTAMP
-from db.session import engine, meta_data, Base
+from db.session import Base
 
 
 class User(Base):
@@ -33,5 +33,3 @@ class User(Base):
 #               Column("is_active", Boolean, default=True),
 #               Column("is_superuser", Boolean, default=False)
 #               )
-#
-# meta_data.create_all(engine)
