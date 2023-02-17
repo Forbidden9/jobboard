@@ -12,14 +12,14 @@ car = APIRouter()
 
 
 @car.get('/', response_model=ListCarResponse)
-def get_cars(db: Session = Depends(get_db), limit: int = 10, page: int = 1, search: str = ''):
+async def get_cars(db: Session = Depends(get_db), limit: int = 10, page: int = 1, search: str = ''):
     skip = (page - 1) * limit
     cars = db.query(Car).group_by(Car.id).filter(Car.car_model.contains(search)).limit(limit).offset(skip).all()
     return {'status': 'success', 'results': len(cars), 'cars': cars}
 
 
 @car.post('/', status_code=status.HTTP_201_CREATED, response_model=CarResponse)
-def create_car(car: CreateCarSchema, db: Session = Depends(get_db)):
+async def create_car(car: CreateCarSchema, db: Session = Depends(get_db)):
     # car.user_id = uuid.UUID(owner_id)
     new_car = Car(**car.dict())
     db.add(new_car)
@@ -29,7 +29,7 @@ def create_car(car: CreateCarSchema, db: Session = Depends(get_db)):
 
 
 @car.put('/{id}', response_model=CarResponse)
-def update_car(id: str, car: UpdateCarSchema, db: Session = Depends(get_db)):
+async def update_car(id: str, car: UpdateCarSchema, db: Session = Depends(get_db)):
     car_query = db.query(Car).filter(Car.id == id)
     updated_car = car_query.first()
 
@@ -44,7 +44,7 @@ def update_car(id: str, car: UpdateCarSchema, db: Session = Depends(get_db)):
 
 
 @car.get('/{id}', response_model=CarResponse)
-def get_car(id: str, db: Session = Depends(get_db)):
+async def get_car(id: str, db: Session = Depends(get_db)):
     car = db.query(Car).filter(Car.id == id).first()
     if not car:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"No car with this id: {id} found")
@@ -52,7 +52,7 @@ def get_car(id: str, db: Session = Depends(get_db)):
 
 
 @car.delete('/{id}')
-def delete_car(id: str, db: Session = Depends(get_db)):
+async def delete_car(id: str, db: Session = Depends(get_db)):
     car_query = db.query(Car).filter(Car.id == id)
     car = car_query.first()
     if not car:
