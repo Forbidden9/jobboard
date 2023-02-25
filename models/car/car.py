@@ -1,7 +1,9 @@
 import uuid
-from sqlalchemy import Table, Column, text
+from datetime import datetime
+from sqlalchemy import Column, text, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql.sqltypes import Integer, String, Boolean, TIMESTAMP
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.sqltypes import String, Boolean, DateTime
 from db.session import Base
 
 
@@ -20,10 +22,13 @@ class Car(Base):
     pick_up_at_airports = Column(Boolean, nullable=False, default=True)
     airport_delivery = Column(Boolean, nullable=False, default=True)
     short_distance_travel = Column(Boolean, nullable=False, default=True)
-    long_distance_travel = Column(Boolean, nullable=False, default=True)
+    long_distance_travel = Column(Boolean, nullable=False, default=False)
 
-    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("now()"))
-    updated_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("now()"))
+    user = relationship('User')
+    user_id = Column(UUID(as_uuid=True), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
 # meta_data.create_all(bind=engine)
