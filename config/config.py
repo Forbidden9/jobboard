@@ -17,5 +17,17 @@ class Settings:
     POSTGRES_DB: str = os.getenv("POSTGRES_DB")
     DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
+    ACCESS_TOKEN_EXPIRES_IN: int = os.getenv("ACCESS_TOKEN_EXPIRES_IN")
+    # REFRESH_TOKEN_EXPIRES_IN: int = os.getenv("REFRESH_TOKEN_EXPIRES_IN")
+
+    JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
+
+
+    # CLIENT_ORIGIN: str
+
+    # JWT_PUBLIC_KEY: str
+    # JWT_PRIVATE_KEY: str
+
 
 settings = Settings()
