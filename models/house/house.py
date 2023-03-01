@@ -32,8 +32,8 @@ class House(Base):
     guide = Column(Boolean, nullable=False, default=False)
     minibar = Column(Boolean, nullable=False, default=False)
     # Amenities
-    air_conditioning = Column(Boolean, nullable=False, default=False)
-    private_bathroom = Column(Boolean, nullable=False, default=False)
+    air_conditioning = Column(Boolean, nullable=False, default=False)  # bedroom
+    private_bathroom = Column(Boolean, nullable=False, default=False)  # bedroom
     towel = Column(Boolean, nullable=False, default=False)
     private_terrace = Column(Boolean, nullable=False, default=False)
     garden = Column(Boolean, nullable=False, default=False)
