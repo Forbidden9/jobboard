@@ -23,7 +23,6 @@ class Settings:
     JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
     SECRET_KEY: str = os.getenv("SECRET_KEY")
 
-
     # CLIENT_ORIGIN: str
 
     # JWT_PUBLIC_KEY: str
