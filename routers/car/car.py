@@ -19,7 +19,7 @@ async def get_cars(db: Session = Depends(get_db), limit: int = 10, page: int = 1
 
 @car.post('/', status_code=status.HTTP_201_CREATED, response_model=CarResponse)
 async def create_car(car: CreateCarSchema, db: Session = Depends(get_db)):
-    # car.user_id = uuid.UUID(owner_id)
+    car.user_id = uuid.UUID('123e4567-e89b-12d3-a456-426614174000')  # aqui debe ser el id del cliente loguado
     new_car = Car(**car.dict())
     db.add(new_car)
     db.commit()
