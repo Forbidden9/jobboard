@@ -1,7 +1,6 @@
 import uuid
 from datetime import datetime
 from typing import List, Optional
-
 from pydantic import BaseModel
 
 
@@ -13,7 +12,7 @@ class CarBaseSchema(BaseModel):
     pick_up_at_airports: bool = True
     airport_delivery: bool = True
     short_distance_travel: bool = True
-    long_distance_travel: bool = True
+    long_distance_travel: bool = False
 
     class Config:
         orm_mode = True
