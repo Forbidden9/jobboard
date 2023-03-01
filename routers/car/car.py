@@ -1,9 +1,8 @@
 import uuid
+
 from db.session import get_db
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status, APIRouter, Response
-
-# from app.oauth2 import require_user
 
 from models.car.car import Car
 from schemas.car.car import ListCarResponse, CarResponse, CreateCarSchema, UpdateCarSchema
@@ -14,8 +13,8 @@ car = APIRouter()
 @car.get('/', response_model=ListCarResponse)
 async def get_cars(db: Session = Depends(get_db), limit: int = 10, page: int = 1, search: str = ''):
     skip = (page - 1) * limit
-    cars = db.query(Car).group_by(Car.id).filter(Car.car_model.contains(search)).limit(limit).offset(skip).all()
-    return {'status': 'success', 'results': len(cars), 'cars': cars}
+    cars = db.query(Car).group_by(Car.id).group_by(Car.user_id).filter(Car.car_model.contains(search)).limit(limit).offset(skip).all()
+    return {'status': status.HTTP_200_OK, 'results': len(cars), 'cars': cars}
 
 
 @car.post('/', status_code=status.HTTP_201_CREATED, response_model=CarResponse)
